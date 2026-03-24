@@ -1,0 +1,827 @@
+/* ================================================
+   ManageInventory.css — MediTrack Pharmacy System
+   Styles for the Manage Inventory page
+   ================================================ */
+
+/* Page wrapper — full screen flex layout */
+.inventory-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #f0f2f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* ================================================
+   SIDEBAR — same as ManageUsers
+   ================================================ */
+
+.sidebar {
+  width: 215px;
+  min-width: 215px;
+  height: 100vh;
+  background: #1a2332;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 20px 15px 18px 15px;
+  border-bottom: 1px solid #243044;
+  flex-shrink: 0;
+}
+
+.sidebar-logo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #56ccf2 0%, #2f80ed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar-logo-name {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15.5px;
+  line-height: 1.2;
+}
+
+.sidebar-logo-sub {
+  color: #8899aa;
+  font-size: 10.5px;
+  margin-top: 1px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  flex: 1;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 17px;
+  color: #8899aa;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: left;
+  width: 100%;
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-link:hover {
+  color: #dde4ee;
+  background: #223044;
+}
+
+.nav-link.active {
+  color: #ffffff;
+  background: #2563eb;
+  border-radius: 8px;
+  margin: 2px 8px;
+  padding: 11px 12px;
+  width: calc(100% - 16px);
+}
+
+.nav-icon {
+  font-size: 15px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ================================================
+   MAIN CONTENT COLUMN
+   ================================================ */
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Top header bar */
+.top-header {
+  width: 100%;
+  height: 62px;
+  background: #ffffff;
+  border-bottom: 1px solid #e4e8ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #56ccf2 0%, #2f80ed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.header-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-logo-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.header-logo-sub {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-admin-label {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: #1d4ed8;
+}
+
+/* ================================================
+   SCROLLABLE BODY
+   ================================================ */
+
+.inventory-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 28px 26px 40px 26px;
+  background: #f0f2f5;
+}
+
+/* Page title */
+.page-title {
+  margin-bottom: 20px;
+}
+
+.page-title h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.page-title p {
+  font-size: 13.5px;
+  color: #6b7280;
+}
+
+/* ── Toolbar row ── */
+.inventory-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Search bar */
+.search-wrapper {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 11px 14px 11px 40px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: #374151;
+  background: #ffffff;
+  outline: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #2563eb;
+}
+
+/* Filter by Category dropdown */
+.filter-wrapper {
+  position: relative;
+}
+
+.filter-btn {
+  padding: 11px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: border-color 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+/* Dropdown list */
+.filter-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  z-index: 100;
+  min-width: 180px;
+  overflow: hidden;
+}
+
+.filter-option {
+  display: block;
+  width: 100%;
+  padding: 10px 18px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  font-size: 13.5px;
+  color: #374151;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.15s;
+}
+
+.filter-option:hover {
+  background: #f1f5f9;
+}
+
+/* Active/selected filter option */
+.filter-option.filter-active {
+  background: #dbeafe;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* Add Medicine button */
+.add-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 22px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+
+.add-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Import CSV button — green */
+.import-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+
+.import-btn:hover {
+  background: #15803d;
+}
+
+/* ================================================
+   INVENTORY TABLE
+   ================================================ */
+
+.inventory-table-card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.07);
+  margin-bottom: 20px;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Blue header row */
+.inventory-table thead tr {
+  background: #2563eb;
+}
+
+.inventory-table thead th {
+  padding: 14px 18px;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* First two columns (ID, Medicine Name) stay left-aligned */
+.inventory-table thead th:nth-child(1),
+.inventory-table thead th:nth-child(2) {
+  text-align: left;
+}
+
+/* Data rows */
+.inventory-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s;
+}
+
+.inventory-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.inventory-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.inventory-table tbody td {
+  padding: 14px 18px;
+  font-size: 13.5px;
+  color: #374151;
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* ID and Medicine Name stay left-aligned */
+.inventory-table tbody td:nth-child(1),
+.inventory-table tbody td:nth-child(2) {
+  text-align: left;
+}
+
+/* ID column — lighter color */
+.id-cell {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* ── Quantity states ── */
+.qty-normal {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.qty-low {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* Red dot for low stock indicator */
+.low-dot {
+  color: #dc2626;
+  font-size: 10px;
+}
+
+/* Expiry — orange when expiring soon */
+.expiry-soon {
+  color: #d97706;
+  font-weight: 500;
+}
+
+.expiry-dot {
+  color: #d97706;
+  font-size: 10px;
+}
+
+/* ── Category badges — each category gets its own color ── */
+.category-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.cat-painkiller       { background: #e0f2fe; color: #0369a1; }
+.cat-antibiotic       { background: #fef3c7; color: #92400e; }
+.cat-antihistamine    { background: #fce7f3; color: #9d174d; }
+.cat-antacid          { background: #dcfce7; color: #15803d; }
+.cat-antidiabetic     { background: #ede9fe; color: #6d28d9; }
+.cat-blood-thinner    { background: #fee2e2; color: #dc2626; }
+.cat-antihypertensive { background: #ffedd5; color: #c2410c; }
+.cat-bronchodilator   { background: #d1fae5; color: #065f46; }
+
+/* ── Edit and Delete icon buttons ── */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Pencil icon — blue background */
+.edit-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #2563eb;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.edit-icon-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Trash icon — red background */
+.delete-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #ef4444;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.delete-icon-btn:hover {
+  background: #dc2626;
+}
+
+/* No results row */
+.no-results {
+  text-align: center;
+  padding: 30px;
+  color: #9ca3af;
+}
+
+/* ================================================
+   PAGINATION + STATS ROW
+   ================================================ */
+
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-top: 1px solid #f1f5f9;
+  flex-wrap: wrap;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #374151;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-btn:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.page-btn.page-active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.page-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.page-arrow:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+/* Summary stat pills */
+.table-stats {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.stat-pill {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.stat-pill-blue   { background: #dbeafe; color: #1d4ed8; }
+.stat-pill-pink   { background: #fee2e2; color: #dc2626; }
+.stat-pill-yellow { background: #fef3c7; color: #92400e; }
+
+/* ================================================
+   ADD / EDIT MEDICINE MODAL
+   ================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  width: 480px;
+  max-width: 95vw;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 22px;
+}
+
+/* Two fields side by side */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #111827;
+  background: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: #2563eb;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 22px;
+}
+
+.modal-cancel-btn {
+  padding: 9px 22px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal-cancel-btn:hover {
+  background: #f9fafb;
+}
+
+.modal-save-btn {
+  padding: 9px 22px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+
+.modal-save-btn:hover {
+  background: #1d4ed8;
+}
+
+/* ================================================
+   DELETE CONFIRM MODAL
+   ================================================ */
+
+.confirm-modal-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  width: 380px;
+  max-width: 95vw;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+}
+
+.confirm-icon {
+  font-size: 40px;
+  margin-bottom: 14px;
+}
+
+.confirm-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.confirm-text {
+  font-size: 13.5px;
+  color: #6b7280;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.confirm-cancel-btn {
+  padding: 9px 24px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.confirm-delete-btn {
+  padding: 9px 24px;
+  border-radius: 8px;
+  border: none;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+
+.confirm-delete-btn:hover {
+  background: #dc2626;
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+@media (max-width: 900px) {
+  .sidebar { width: 62px; min-width: 62px; }
+  .sidebar-logo-name, .sidebar-logo-sub { display: none; }
+  .nav-link span:not(.nav-icon) { display: none; }
+  .table-stats { margin-left: 0; }
+  .table-footer { justify-content: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .inventory-body { padding: 14px; }
+  .inventory-toolbar { flex-direction: column; align-items: stretch; }
+  .add-btn, .import-btn { justify-content: center; }
+  .form-row { grid-template-columns: 1fr; }
+}
