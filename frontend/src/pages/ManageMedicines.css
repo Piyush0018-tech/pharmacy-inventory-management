@@ -1,0 +1,634 @@
+/* ================================================
+   ManageMedicines.css — MediTrack Pharmacy System
+   ================================================ */
+
+.medicines-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #f0f2f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* ================================================
+   SIDEBAR
+   ================================================ */
+
+.sidebar {
+  width: 215px;
+  min-width: 215px;
+  height: 100vh;
+  background: #1a2332;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 20px 15px 18px 15px;
+  border-bottom: 1px solid #243044;
+}
+
+.sidebar-logo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #56ccf2 0%, #2f80ed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar-logo-name {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15.5px;
+}
+
+.sidebar-logo-sub {
+  color: #8899aa;
+  font-size: 10.5px;
+  margin-top: 1px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  flex: 1;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 17px;
+  color: #8899aa;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: left;
+  width: 100%;
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-link:hover {
+  color: #dde4ee;
+  background: #223044;
+}
+
+.nav-link.active {
+  color: #ffffff;
+  background: #2563eb;
+  border-radius: 8px;
+  margin: 2px 8px;
+  padding: 11px 12px;
+  width: calc(100% - 16px);
+}
+
+.nav-icon {
+  font-size: 15px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ================================================
+   MAIN CONTENT
+   ================================================ */
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.top-header {
+  width: 100%;
+  height: 62px;
+  background: #ffffff;
+  border-bottom: 1px solid #e4e8ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #56ccf2 0%, #2f80ed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.header-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-logo-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.header-logo-sub {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-admin-label {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover { background: #1d4ed8; }
+
+/* ── Scrollable body ── */
+.medicines-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 26px 40px 26px;
+  background: #f0f2f5;
+}
+
+.page-title { margin-bottom: 20px; }
+.page-title h1 { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+.page-title p  { font-size: 13.5px; color: #6b7280; }
+
+/* ================================================
+   TOP 3 ACTION CARDS
+   ================================================ */
+
+.action-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.action-card {
+  border: none;
+  border-radius: 14px;
+  padding: 24px 20px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.15s, box-shadow 0.15s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+/* Blue card */
+.card-blue  { background: #2563eb; color: #ffffff; }
+/* Orange card */
+.card-orange { background: #f59e0b; color: #ffffff; }
+/* Red card */
+.card-red   { background: #ef4444; color: #ffffff; }
+
+.card-icon  { font-size: 28px; margin-bottom: 10px; }
+.card-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.card-desc  { font-size: 12.5px; opacity: 0.9; line-height: 1.4; }
+
+/* ================================================
+   TWO COLUMN GRID
+   ================================================ */
+
+.medicines-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* White panel card */
+.panel {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  margin-bottom: 20px;
+}
+
+.panel-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+/* Panel header with title + badge on same row */
+.panel-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.panel-header-row .panel-title {
+  margin-bottom: 0;
+}
+
+/* Count badge */
+.badge-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.badge-red    { background: #ef4444; }
+.badge-orange { background: #f59e0b; }
+
+/* ================================================
+   QUICK STOCK UPDATE
+   ================================================ */
+
+/* Search bar inside stock panel */
+.stock-search-wrapper {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.stock-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.stock-search-input {
+  width: 100%;
+  padding: 10px 14px 10px 36px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #374151;
+  outline: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.stock-search-input:focus { border-color: #2563eb; }
+
+/* Medicine name + current stock fields side by side */
+.stock-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.stock-field-group { display: flex; flex-direction: column; gap: 6px; }
+
+.stock-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.stock-input {
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #374151;
+  background: #f8fafc;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: none;
+}
+
+/* Current stock shown in blue */
+.stock-qty { color: #2563eb; font-weight: 700; }
+
+/* Add/Remove/Update control row */
+.stock-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.qty-input {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 14px;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #374151;
+  outline: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn-add {
+  padding: 10px 20px;
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+.btn-add:hover { background: #15803d; }
+
+.btn-remove {
+  padding: 10px 20px;
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+.btn-remove:hover { background: #dc2626; }
+
+.btn-update {
+  padding: 10px 20px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+.btn-update:hover { background: #1d4ed8; }
+
+/* ================================================
+   EXPIRING SOON TABLE
+   ================================================ */
+
+.mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 14px;
+}
+
+.mini-table thead tr {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.mini-table thead th {
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #6b7280;
+  text-align: left;
+}
+
+.mini-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.mini-table tbody tr:last-child { border-bottom: none; }
+
+/* Expiring rows have light red/pink background */
+.expiring-row { background: #fff8f8; }
+.expiring-row:hover { background: #fff0f0; }
+
+.mini-table tbody td {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #374151;
+}
+
+/* Red expiry date */
+.expiry-date-cell { color: #ef4444; font-weight: 600; }
+
+/* Mark for Return button */
+.mark-return-btn {
+  padding: 5px 12px;
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+.mark-return-btn:hover { background: #dc2626; }
+
+/* View all link */
+.view-all-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0;
+  text-decoration: none;
+}
+.view-all-link:hover { text-decoration: underline; }
+
+/* ================================================
+   LOW STOCK ALERT LIST
+   ================================================ */
+
+.low-stock-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.low-stock-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.low-stock-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 3px;
+}
+
+.low-stock-detail {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Reorder button */
+.reorder-btn {
+  padding: 5px 14px;
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.reorder-btn:hover { background: #dc2626; }
+
+/* ================================================
+   MEDICINE STATISTICS
+   ================================================ */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 4px;
+}
+
+.stat-sub {
+  font-size: 11.5px;
+  color: #6b7280;
+}
+
+/* Each stat card color variation */
+.stat-blue   { background: #eff6ff; }
+.stat-orange { background: #fffbeb; }
+.stat-green  { background: #f0fdf4; }
+.stat-red    { background: #fff1f2; }
+
+.stat-orange-val { color: #f59e0b; }
+.stat-green-val  { color: #16a34a; }
+.stat-red-val    { color: #ef4444; }
+
+/* Generate report button */
+.generate-report-btn {
+  width: 100%;
+  padding: 12px;
+  background: #7c3aed;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+.generate-report-btn:hover { background: #6d28d9; }
+
+.no-results {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+  padding: 16px 0;
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+@media (max-width: 1100px) {
+  .medicines-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  .sidebar { width: 62px; min-width: 62px; }
+  .sidebar-logo-name, .sidebar-logo-sub { display: none; }
+  .nav-link span:not(.nav-icon) { display: none; }
+  .action-cards { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .medicines-body { padding: 14px; }
+  .stock-fields { grid-template-columns: 1fr; }
+  .stock-controls { flex-direction: column; }
+  .stats-grid { grid-template-columns: 1fr; }
+}
