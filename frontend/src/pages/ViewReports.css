@@ -1,0 +1,506 @@
+/* ================================================
+   ViewReports.css — MediTrack Pharmacy System
+   ================================================ */
+
+.reports-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #f0f2f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* ================================================
+   SIDEBAR
+   ================================================ */
+
+.sidebar {
+  width: 215px;
+  min-width: 215px;
+  height: 100vh;
+  background: #1a2332;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 20px 15px 18px 15px;
+  border-bottom: 1px solid #243044;
+}
+
+.sidebar-logo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #56ccf2 0%, #2f80ed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar-logo-name { color: #ffffff; font-weight: 700; font-size: 15.5px; }
+.sidebar-logo-sub  { color: #8899aa; font-size: 10.5px; margin-top: 1px; }
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  flex: 1;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 17px;
+  color: #8899aa;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: left;
+  width: 100%;
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-link:hover { color: #dde4ee; background: #223044; }
+
+.nav-link.active {
+  color: #ffffff;
+  background: #2563eb;
+  border-radius: 8px;
+  margin: 2px 8px;
+  padding: 11px 12px;
+  width: calc(100% - 16px);
+}
+
+.nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+
+/* ================================================
+   MAIN CONTENT
+   ================================================ */
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.top-header {
+  width: 100%;
+  height: 62px;
+  background: #ffffff;
+  border-bottom: 1px solid #e4e8ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+
+.header-left { display: flex; align-items: center; gap: 12px; }
+
+.header-logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #56ccf2 0%, #2f80ed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.header-logo-text { display: flex; flex-direction: column; }
+.header-logo-title { font-size: 15px; font-weight: 700; color: #111827; }
+.header-logo-sub   { font-size: 11px; color: #6b7280; }
+
+.header-right { display: flex; align-items: center; gap: 14px; }
+.header-admin-label { font-size: 14px; color: #374151; font-weight: 500; }
+
+.logout-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+.logout-btn:hover { background: #1d4ed8; }
+
+/* Scrollable body */
+.reports-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 26px 40px 26px;
+  background: #f0f2f5;
+}
+
+.page-title { margin-bottom: 20px; }
+.page-title h1 { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+.page-title p  { font-size: 13.5px; color: #6b7280; }
+
+/* ================================================
+   TOP 3 REPORT TYPE CARDS
+   ================================================ */
+
+.report-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.report-card {
+  border: none;
+  border-radius: 14px;
+  padding: 24px 20px;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.15s, box-shadow 0.15s;
+  opacity: 0.88;
+}
+
+.report-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.14);
+  opacity: 1;
+}
+
+.card-selected { opacity: 1; box-shadow: 0 4px 16px rgba(0,0,0,0.16); }
+
+.card-blue   { background: #2563eb; color: #ffffff; }
+.card-purple { background: #7c3aed; color: #ffffff; }
+.card-orange { background: #f59e0b; color: #ffffff; }
+
+.card-icon  { font-size: 28px; margin-bottom: 10px; }
+.card-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.card-desc  { font-size: 12.5px; opacity: 0.9; line-height: 1.4; }
+
+/* ================================================
+   MAIN REPORT PANEL
+   ================================================ */
+
+.panel {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  margin-bottom: 20px;
+}
+
+.panel-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 18px;
+}
+
+/* Date range + buttons row */
+.report-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.date-group { display: flex; flex-direction: column; gap: 6px; }
+
+.date-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.date-input {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #111827;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.date-input:focus { border-color: #2563eb; }
+
+.generate-btn {
+  padding: 10px 22px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+  align-self: flex-end;
+}
+.generate-btn:hover { background: #1d4ed8; }
+
+/* Export PDF — red */
+.export-pdf-btn {
+  padding: 10px 20px;
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+  align-self: flex-end;
+}
+.export-pdf-btn:hover { background: #dc2626; }
+
+/* Export Excel — green */
+.export-excel-btn {
+  padding: 10px 20px;
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+  align-self: flex-end;
+}
+.export-excel-btn:hover { background: #15803d; }
+
+/* ── Summary Stat Cards ── */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.summary-card {
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.sc-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.sc-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2563eb;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.sc-sub {
+  font-size: 11.5px;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* Card background + value colors */
+.sc-blue        { background: #eff6ff; }
+.sc-green       { background: #f0fdf4; }
+.sc-orange      { background: #fffbeb; }
+.sc-pink        { background: #fff1f2; }
+.sc-green-val   { color: #16a34a; }
+.sc-orange-val  { color: #f59e0b; }
+.sc-pink-val    { color: #e11d48; font-size: 15px; }
+
+/* ================================================
+   BAR CHART — Sales Trend
+   ================================================ */
+
+.chart-section { margin-bottom: 30px; }
+
+.chart-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+/* Chart container */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  height: 220px;
+  padding: 0 10px 40px 10px;
+  border-bottom: 2px solid #e2e8f0;
+  border-left: 2px solid #e2e8f0;
+  position: relative;
+}
+
+/* Each bar column */
+.bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  height: 100%;
+  position: relative;
+}
+
+/* Amount label above bar */
+.bar-label {
+  font-size: 11px;
+  color: #374151;
+  font-weight: 500;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+}
+
+/* The bar */
+.bar {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  min-height: 8px;
+  transition: height 0.3s ease;
+  margin-top: auto;
+}
+
+.bar-blue  { background: #60a5fa; }
+.bar-green { background: #4ade80; } /* Highest bar — green */
+
+/* Day label below chart */
+.bar-day {
+  font-size: 12px;
+  color: #6b7280;
+  position: absolute;
+  bottom: -28px;
+}
+
+.bar-day-bold {
+  color: #111827;
+  font-weight: 700;
+}
+
+/* ================================================
+   TOP 5 SELLING PRODUCTS TABLE
+   ================================================ */
+
+.top-products-section { margin-top: 10px; }
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table thead tr { background: #2563eb; }
+
+.products-table thead th {
+  padding: 13px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: left;
+}
+
+/* Center align columns except name */
+.products-table thead th:nth-child(1),
+.products-table thead th:nth-child(3),
+.products-table thead th:nth-child(4),
+.products-table thead th:nth-child(5) { text-align: center; }
+
+.products-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s;
+}
+.products-table tbody tr:last-child { border-bottom: none; }
+.products-table tbody tr:hover { background: #f8fafc; }
+
+.products-table tbody td {
+  padding: 13px 16px;
+  font-size: 13.5px;
+  color: #374151;
+  text-align: left;
+}
+
+.products-table tbody td:nth-child(1),
+.products-table tbody td:nth-child(3),
+.products-table tbody td:nth-child(4),
+.products-table tbody td:nth-child(5) { text-align: center; }
+
+/* Rank badge */
+.rank-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.rank-1 { background: #fef3c7; color: #92400e; }
+.rank-2 { background: #f3f4f6; color: #374151; }
+.rank-3 { background: #ffedd5; color: #c2410c; }
+.rank-4 { background: #f0fdf4; color: #15803d; }
+.rank-5 { background: #eff6ff; color: #1d4ed8; }
+
+.product-name { font-weight: 600; color: #111827; }
+
+.category-tag {
+  display: inline-block;
+  padding: 3px 12px;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.units-sold   { font-weight: 600; color: #2563eb; }
+.revenue-cell { font-weight: 600; color: #16a34a; }
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+@media (max-width: 1100px) {
+  .summary-cards { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 900px) {
+  .sidebar { width: 62px; min-width: 62px; }
+  .sidebar-logo-name, .sidebar-logo-sub { display: none; }
+  .nav-link span:not(.nav-icon) { display: none; }
+  .report-cards { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .reports-body { padding: 14px; }
+  .report-controls { flex-direction: column; align-items: stretch; }
+  .summary-cards { grid-template-columns: 1fr; }
+  .bar-chart { height: 160px; }
+}
