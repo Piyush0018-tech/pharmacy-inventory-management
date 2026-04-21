@@ -1,0 +1,47 @@
+/* ================================================
+   index.css — MediTrack Global Reset
+   Removes every default browser margin/padding
+   that causes white gaps around the page edges
+   ================================================ */
+
+/* Universal box-sizing and zero spacing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* html and body must be zero margin/padding and full size */
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;          /* THIS is what causes the gap around the page */
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5;
+}
+
+/* Vite mounts app here — must also be full size */
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}

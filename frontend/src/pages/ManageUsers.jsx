@@ -1,64 +1,64 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getUsers, createUser, updateUser, deleteUser } from "../api";
 import "./ManageUsers.css";
 
-// Manage Users page — MediTrack Pharmacy System
-// Features: search, add, edit, delete users with modal forms
-
-// Initial sample user data
-const initialUsers = [
-  { id: "001", fullName: "John Doe",        email: "john.doe@pharmacy.com",       role: "Admin", status: "Active"   },
-  { id: "002", fullName: "Sarah Smith",     email: "sarah.smith@pharmacy.com",    role: "Staff", status: "Active"   },
-  { id: "003", fullName: "Michael Johnson", email: "michael.j@pharmacy.com",      role: "Staff", status: "Active"   },
-  { id: "004", fullName: "Emily Davis",     email: "emily.davis@pharmacy.com",    role: "Admin", status: "Inactive" },
-  { id: "005", fullName: "David Wilson",    email: "david.wilson@pharmacy.com",   role: "Staff", status: "Active"   },
-  { id: "006", fullName: "Lisa Anderson",   email: "lisa.anderson@pharmacy.com",  role: "Staff", status: "Active"   },
-  { id: "007", fullName: "Robert Taylor",   email: "robert.taylor@pharmacy.com",  role: "Staff", status: "Active"   },
-  { id: "008", fullName: "Jennifer Martinez", email: "jennifer.m@pharmacy.com",   role: "Admin", status: "Active"   },
-];
-
-// Sidebar nav items — same across all pages
 const navItems = [
-  { label: "Dashboard",        icon: "🏠", path: "/dashboard"        },
-  { label: "Manage Users",     icon: "👥", path: "/manage-users"     },
+  { label: "Dashboard", icon: "🏠", path: "/dashboard"        },
+  { label: "Manage Users",icon: "👥", path: "/manage-users"     },
   { label: "Manage Inventory", icon: "📦", path: "/manage-inventory" },
   { label: "Manage Medicines", icon: "💊", path: "/manage-medicines" },
   { label: "Manage Purchases", icon: "🛒", path: "/manage-purchases" },
-  { label: "Process Sales",    icon: "💰", path: "/process-sales"    },
-  { label: "Payment",          icon: "💳", path: "/payment"          },
-  { label: "View Reports",     icon: "📋", path: "/view-reports"     },
+  { label: "Process Sales", icon: "💰", path: "/process-sales"    },
+  { label: "Payment", icon: "💳", path: "/payment"          },
+  { label: "View Reports", icon: "📋", path: "/view-reports"     },
 ];
 
-// Empty form state used for Add New User
 const emptyForm = { fullName: "", email: "", role: "Staff", status: "Active", password: "" };
 
 const ManageUsers = () => {
   const navigate = useNavigate();
 
-  // All users list
-  const [users, setUsers]               = useState(initialUsers);
-
-  // Search input value
-  const [searchQuery, setSearchQuery]   = useState("");
-
-  // Current page for pagination
-  const [currentPage, setCurrentPage]   = useState(1);
+  const [users, setUsers]  = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [showModal, setShowModal]  = useState(false);
+  const [showConfirm, setShowConfirm]   = useState(false);
+  const [editingUser, setEditingUser]   = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [formData, setFormData] = useState(emptyForm);
+  const [loading, setLoading] = useState(false);
+  const [error, setError]  = useState("");
+  // Supports modal input validation only:
+  const [modalError, setModalError]  = useState(""); 
   const usersPerPage = 8;
 
-  // Modal states
-  const [showModal, setShowModal]       = useState(false);   // add/edit modal
-  const [showConfirm, setShowConfirm]   = useState(false);   // delete confirm modal
-  const [editingUser, setEditingUser]   = useState(null);    // null = adding, object = editing
-  const [deleteTarget, setDeleteTarget] = useState(null);    // user to delete
-  const [formData, setFormData]         = useState(emptyForm);
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
-  // Logout handler
+  const fetchUsers = async () => {
+    try {
+      const res = await getUsers();
+      const mapped = res.data.map((u) => ({
+        id: u.id,
+        fullName: u.full_name,
+        email: u.email,
+        role: u.role,
+        status: u.status,
+      }));
+      setUsers(mapped);
+    } catch (err) {
+      setError("Failed to load users.");
+    }
+  };
+
   const handleLogout = () => {
+    localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate("/");
   };
 
-  // Filter users based on search query (name, email, or role)
   const filtered = users.filter((u) => {
     const q = searchQuery.toLowerCase();
     return (
@@ -68,73 +68,99 @@ const ManageUsers = () => {
     );
   });
 
-  // Pagination — slice filtered list for current page
-  const totalPages  = Math.ceil(filtered.length / usersPerPage);
+  const totalPages = Math.ceil(filtered.length / usersPerPage);
   const startIndex  = (currentPage - 1) * usersPerPage;
   const currentRows = filtered.slice(startIndex, startIndex + usersPerPage);
 
-  // Summary counts
-  const totalCount    = users.length;
-  const activeCount   = users.filter((u) => u.status === "Active").length;
+  const totalCount = users.length;
+  const activeCount = users.filter((u) => u.status === "Active").length;
   const inactiveCount = users.filter((u) => u.status === "Inactive").length;
 
-  // Open Add New User modal
   const openAddModal = () => {
     setEditingUser(null);
     setFormData(emptyForm);
+    setModalError("");
+    setError("");
     setShowModal(true);
   };
 
-  // Open Edit User modal and pre-fill form
   const openEditModal = (user) => {
     setEditingUser(user);
     setFormData({ fullName: user.fullName, email: user.email, role: user.role, status: user.status, password: "" });
+    setModalError("");
+    setError("");
     setShowModal(true);
   };
 
-  // Handle form input changes
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (modalError) setModalError(""); // clear as user types
   };
 
-  // Save user — either update existing or add new
-  const handleSave = () => {
-    if (!formData.fullName || !formData.email) return;
-
-    if (editingUser) {
-      // Update existing user
-      setUsers(users.map((u) =>
-        u.id === editingUser.id
-          ? { ...u, fullName: formData.fullName, email: formData.email, role: formData.role, status: formData.status }
-          : u
-      ));
-    } else {
-      // Add new user with auto-incremented ID
-      const newId = String(users.length + 1).padStart(3, "0");
-      setUsers([...users, { id: newId, ...formData }]);
+  // Validation: Require all fields for add, password only for add, not edit.
+  const handleSave = async () => {
+    // If adding: require all; if editing: require name/email only
+    if (
+      !formData.fullName.trim() ||
+      !formData.email.trim() ||
+      (!editingUser && !formData.password.trim())
+    ) {
+      setModalError("Please fill in all required fields.");
+      return;
     }
 
-    setShowModal(false);
-    setFormData(emptyForm);
+    try {
+      setLoading(true);
+      setModalError("");
+
+      if (editingUser) {
+        await updateUser(editingUser.id, {
+          full_name: formData.fullName,
+          email: formData.email,
+          role: formData.role,
+          status:    formData.status,
+        });
+      } else {
+        await createUser({
+          full_name: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+          role: formData.role,
+          status: formData.status,
+        });
+      }
+
+      await fetchUsers();
+      setShowModal(false);
+      setFormData(emptyForm);
+    } catch (err) {
+      setModalError(err.response?.data?.message || "Failed to save user.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Open delete confirmation modal
   const openDeleteConfirm = (user) => {
     setDeleteTarget(user);
     setShowConfirm(true);
   };
 
-  // Confirm and remove user
-  const handleDelete = () => {
-    setUsers(users.filter((u) => u.id !== deleteTarget.id));
-    setShowConfirm(false);
-    setDeleteTarget(null);
+  const handleDelete = async () => {
+    try {
+      await deleteUser(deleteTarget.id);
+      await fetchUsers();
+      setShowConfirm(false);
+      setDeleteTarget(null);
+    } catch (err) {
+      setError("Failed to delete user.");
+      setShowConfirm(false);
+    }
   };
 
   return (
     <div className="manage-users-wrapper">
 
-      {/* ════════ SIDEBAR ════════ */}
+      {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-logo">
           <div className="sidebar-logo-icon">💊</div>
@@ -158,10 +184,8 @@ const ManageUsers = () => {
         </nav>
       </aside>
 
-      {/* ════════ MAIN COLUMN ════════ */}
+      {/* MAIN CONTENT */}
       <div className="main-content">
-
-        {/* Top header with logo + admin/logout */}
         <header className="top-header">
           <div className="header-left">
             <div className="header-logo-icon">💊</div>
@@ -176,16 +200,14 @@ const ManageUsers = () => {
           </div>
         </header>
 
-        {/* ── Scrollable page body ── */}
         <div className="manage-users-body">
-
-          {/* Page title */}
           <div className="page-title">
             <h1>Manage Users</h1>
             <p>Add, edit, or remove user accounts</p>
           </div>
 
-          {/* Search bar + Add New User button */}
+          {error && <div className="error-message">{error}</div>}
+
           <div className="users-toolbar">
             <div className="search-wrapper">
               <span className="search-icon">🔍</span>
@@ -196,7 +218,7 @@ const ManageUsers = () => {
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-                  setCurrentPage(1); // reset to page 1 on new search
+                  setCurrentPage(1);
                 }}
               />
             </div>
@@ -205,11 +227,8 @@ const ManageUsers = () => {
             </button>
           </div>
 
-          {/* Users table */}
           <div className="users-table-card">
             <table className="users-table">
-
-              {/* Blue header */}
               <thead>
                 <tr>
                   <th>ID</th>
@@ -220,8 +239,6 @@ const ManageUsers = () => {
                   <th>Actions</th>
                 </tr>
               </thead>
-
-              {/* Table rows */}
               <tbody>
                 {currentRows.length > 0 ? (
                   currentRows.map((user) => (
@@ -229,22 +246,16 @@ const ManageUsers = () => {
                       <td>{user.id}</td>
                       <td>{user.fullName}</td>
                       <td>{user.email}</td>
-
-                      {/* Role badge — blue for Admin, yellow for Staff */}
                       <td>
                         <span className={`role-badge ${user.role === "Admin" ? "role-admin" : "role-staff"}`}>
                           {user.role}
                         </span>
                       </td>
-
-                      {/* Status badge — green for Active, red for Inactive */}
                       <td>
                         <span className={`status-badge ${user.status === "Active" ? "status-active" : "status-inactive"}`}>
                           {user.status}
                         </span>
                       </td>
-
-                      {/* Edit and Delete action buttons */}
                       <td>
                         <div className="action-buttons">
                           <button className="edit-btn" onClick={() => openEditModal(user)}>Edit</button>
@@ -254,20 +265,16 @@ const ManageUsers = () => {
                     </tr>
                   ))
                 ) : (
-                  // No results found message
                   <tr>
                     <td colSpan={6} style={{ textAlign: "center", padding: "30px", color: "#9ca3af" }}>
-                      No users found matching your search.
+                      No users found.
                     </td>
                   </tr>
                 )}
               </tbody>
             </table>
 
-            {/* Pagination + summary stats */}
             <div className="table-footer">
-
-              {/* Page number buttons */}
               <div className="pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
@@ -278,32 +285,45 @@ const ManageUsers = () => {
                     {page}
                   </button>
                 ))}
-                {/* Next arrow */}
                 {currentPage < totalPages && (
                   <button className="page-arrow" onClick={() => setCurrentPage(currentPage + 1)}>→</button>
                 )}
               </div>
 
-              {/* Summary pills */}
               <div className="table-stats">
                 <span className="stat-pill stat-pill-blue">Total: {totalCount} users</span>
                 <span className="stat-pill stat-pill-green">Active: {activeCount} users</span>
                 <span className="stat-pill stat-pill-pink">Inactive: {inactiveCount} users</span>
               </div>
-
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* ════════ ADD / EDIT USER MODAL ════════ */}
+      {/* ADD / EDIT MODAL */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <h2 className="modal-title">{editingUser ? "Edit User" : "Add New User"}</h2>
 
-            {/* Full Name */}
+            {/* Modal validation error (required fields) - Always on top of form */}
+            {modalError && (
+              <div
+                style={{
+                  background: "#fee2e2",
+                  color: "#dc2626",
+                  padding: "10px 14px",
+                  borderRadius: "8px",
+                  fontSize: "13.5px",
+                  marginBottom: "14px",
+                  textAlign: "center",
+                  fontWeight: 500,
+                }}
+              >
+                {modalError}
+              </div>
+            )}
+
             <div className="form-group">
               <label className="form-label">Full Name</label>
               <input
@@ -316,7 +336,6 @@ const ManageUsers = () => {
               />
             </div>
 
-            {/* Email */}
             <div className="form-group">
               <label className="form-label">Email Address</label>
               <input
@@ -329,7 +348,7 @@ const ManageUsers = () => {
               />
             </div>
 
-            {/* Password — only shown when adding new user */}
+            {/* Password only shown when adding new user */}
             {!editingUser && (
               <div className="form-group">
                 <label className="form-label">Password</label>
@@ -344,7 +363,6 @@ const ManageUsers = () => {
               </div>
             )}
 
-            {/* Role dropdown */}
             <div className="form-group">
               <label className="form-label">Role</label>
               <select className="form-select" name="role" value={formData.role} onChange={handleFormChange}>
@@ -354,7 +372,6 @@ const ManageUsers = () => {
               </select>
             </div>
 
-            {/* Status dropdown */}
             <div className="form-group">
               <label className="form-label">Status</label>
               <select className="form-select" name="status" value={formData.status} onChange={handleFormChange}>
@@ -363,19 +380,17 @@ const ManageUsers = () => {
               </select>
             </div>
 
-            {/* Modal action buttons */}
             <div className="modal-actions">
               <button className="modal-cancel-btn" onClick={() => setShowModal(false)}>Cancel</button>
-              <button className="modal-save-btn" onClick={handleSave}>
-                {editingUser ? "Save Changes" : "Add User"}
+              <button className="modal-save-btn" onClick={handleSave} disabled={loading}>
+                {loading ? "Saving..." : editingUser ? "Save Changes" : "Add User"}
               </button>
             </div>
-
           </div>
         </div>
       )}
 
-      {/* ════════ DELETE CONFIRMATION MODAL ════════ */}
+      {/* DELETE CONFIRM MODAL */}
       {showConfirm && deleteTarget && (
         <div className="modal-overlay" onClick={() => setShowConfirm(false)}>
           <div className="confirm-modal-box" onClick={(e) => e.stopPropagation()}>
@@ -392,7 +407,6 @@ const ManageUsers = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

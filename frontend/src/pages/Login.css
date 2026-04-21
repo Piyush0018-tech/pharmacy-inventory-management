@@ -354,4 +354,15 @@ html, body {
   .brand-text h2 {
     font-size: 24px;
   }
+
+  /* Error message shown when login fails */
+.error-message {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  margin-bottom: 16px;
+  text-align: center;
+}
 }

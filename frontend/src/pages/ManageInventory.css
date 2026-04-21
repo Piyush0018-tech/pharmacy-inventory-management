@@ -1,6 +1,5 @@
 /* ================================================
-   ManageInventory.css — MediTrack Pharmacy System
-   Styles for the Manage Inventory page
+   ManageInventory.css 
    ================================================ */
 
 /* Page wrapper — full screen flex layout */
@@ -354,24 +353,8 @@
   background: #1d4ed8;
 }
 
-/* Import CSV button — green */
-.import-btn {
-  background: #16a34a;
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  padding: 11px 20px;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: background 0.2s;
-}
+/* ✅ Import CSV styles removed (not needed anymore) */
 
-.import-btn:hover {
-  background: #15803d;
-}
 
 /* ================================================
    INVENTORY TABLE
@@ -822,6 +805,6 @@
 @media (max-width: 600px) {
   .inventory-body { padding: 14px; }
   .inventory-toolbar { flex-direction: column; align-items: stretch; }
-  .add-btn, .import-btn { justify-content: center; }
+  .add-btn { justify-content: center; }
   .form-row { grid-template-columns: 1fr; }
 }

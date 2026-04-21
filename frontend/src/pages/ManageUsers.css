@@ -3,7 +3,6 @@
    Styles for the Manage Users page
    ================================================ */
 
-/* Page wrapper — same layout as dashboard */
 .manage-users-wrapper {
   display: flex;
   width: 100vw;
@@ -123,7 +122,6 @@
   min-width: 0;
 }
 
-/* ── TOP HEADER — logo left, admin+logout right ── */
 .top-header {
   width: 100%;
   height: 62px;
@@ -375,13 +373,10 @@
   font-weight: 500;
 }
 
-/* Blue-teal for Admin */
 .role-admin {
   background: #e0f2fe;
   color: #0369a1;
 }
-
-/* Orange/yellow for Staff */
 .role-staff {
   background: #fef3c7;
   color: #92400e;
@@ -396,13 +391,10 @@
   font-weight: 500;
 }
 
-/* Green for Active */
 .status-active {
   background: #dcfce7;
   color: #15803d;
 }
-
-/* Pink/red for Inactive */
 .status-inactive {
   background: #fee2e2;
   color: #dc2626;
@@ -428,11 +420,9 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.2s;
 }
-
 .edit-btn:hover {
   background: #1d4ed8;
 }
-
 .delete-btn {
   background: #ef4444;
   color: #ffffff;
@@ -445,7 +435,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.2s;
 }
-
 .delete-btn:hover {
   background: #dc2626;
 }
@@ -463,14 +452,11 @@
   border-top: 1px solid #f1f5f9;
   flex-wrap: wrap;
 }
-
-/* Pagination buttons row */
 .pagination {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .page-btn {
   width: 36px;
   height: 36px;
@@ -487,20 +473,15 @@
   align-items: center;
   justify-content: center;
 }
-
 .page-btn:hover {
   border-color: #2563eb;
   color: #2563eb;
 }
-
-/* Active/current page button */
 .page-btn.page-active {
   background: #2563eb;
   color: #ffffff;
   border-color: #2563eb;
 }
-
-/* Arrow button */
 .page-arrow {
   width: 36px;
   height: 36px;
@@ -516,27 +497,22 @@
   justify-content: center;
   transition: all 0.15s;
 }
-
 .page-arrow:hover {
   border-color: #2563eb;
   color: #2563eb;
 }
-
-/* Summary stat pills at bottom */
 .table-stats {
   display: flex;
   gap: 10px;
   align-items: center;
   margin-left: auto;
 }
-
 .stat-pill {
   padding: 6px 16px;
   border-radius: 20px;
   font-size: 12.5px;
   font-weight: 500;
 }
-
 .stat-pill-blue  { background: #dbeafe; color: #1d4ed8; }
 .stat-pill-green { background: #dcfce7; color: #15803d; }
 .stat-pill-pink  { background: #fee2e2; color: #dc2626; }
@@ -574,7 +550,6 @@
 .form-group {
   margin-bottom: 16px;
 }
-
 .form-label {
   display: block;
   font-size: 13px;
@@ -596,7 +571,6 @@
   outline: none;
   transition: border-color 0.2s;
 }
-
 .form-input:focus,
 .form-select:focus {
   border-color: #2563eb;
@@ -607,6 +581,7 @@
   gap: 10px;
   justify-content: flex-end;
   margin-top: 22px;
+  align-items: center; /* --- THIS IS THE KEY FIX for perfect btn alignment --- */
 }
 
 .modal-cancel-btn {
@@ -619,12 +594,13 @@
   font-weight: 500;
   cursor: pointer;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .modal-cancel-btn:hover {
   background: #f9fafb;
 }
-
 .modal-save-btn {
   padding: 9px 22px;
   border-radius: 8px;
@@ -636,8 +612,10 @@
   cursor: pointer;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .modal-save-btn:hover {
   background: #1d4ed8;
 }
@@ -645,7 +623,6 @@
 /* ================================================
    DELETE CONFIRM MODAL
    ================================================ */
-
 .confirm-modal-box {
   background: #ffffff;
   border-radius: 16px;
@@ -655,32 +632,27 @@
   text-align: center;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
 }
-
 .confirm-icon {
   font-size: 40px;
   margin-bottom: 14px;
 }
-
 .confirm-title {
   font-size: 17px;
   font-weight: 700;
   color: #111827;
   margin-bottom: 8px;
 }
-
 .confirm-text {
   font-size: 13.5px;
   color: #6b7280;
   margin-bottom: 22px;
   line-height: 1.5;
 }
-
 .confirm-actions {
   display: flex;
   gap: 10px;
   justify-content: center;
 }
-
 .confirm-cancel-btn {
   padding: 9px 24px;
   border-radius: 8px;
@@ -692,7 +664,6 @@
   cursor: pointer;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 .confirm-delete-btn {
   padding: 9px 24px;
   border-radius: 8px;
@@ -705,7 +676,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.2s;
 }
-
 .confirm-delete-btn:hover {
   background: #dc2626;
 }
@@ -713,7 +683,6 @@
 /* ================================================
    RESPONSIVE
    ================================================ */
-
 @media (max-width: 900px) {
   .sidebar { width: 62px; min-width: 62px; }
   .sidebar-logo-name, .sidebar-logo-sub { display: none; }
@@ -721,7 +690,6 @@
   .table-stats { margin-left: 0; }
   .table-footer { justify-content: flex-start; }
 }
-
 @media (max-width: 600px) {
   .manage-users-body { padding: 14px; }
   .users-toolbar { flex-direction: column; align-items: stretch; }

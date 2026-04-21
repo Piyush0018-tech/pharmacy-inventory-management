@@ -8,15 +8,12 @@
   height: 100vh;
   overflow: hidden;
   background: #f0f2f5;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
 }
 
-/* ================================================
-   SIDEBAR
-   ================================================ */
+/* ===================== SIDEBAR ===================== */
 
 .sidebar {
   width: 215px;
@@ -49,8 +46,16 @@
   flex-shrink: 0;
 }
 
-.sidebar-logo-name { color: #ffffff; font-weight: 700; font-size: 15.5px; }
-.sidebar-logo-sub  { color: #8899aa; font-size: 10.5px; margin-top: 1px; }
+.sidebar-logo-name {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15.5px;
+}
+.sidebar-logo-sub {
+  color: #8899aa;
+  font-size: 10.5px;
+  margin-top: 1px;
+}
 
 .sidebar-nav {
   display: flex;
@@ -69,14 +74,15 @@
   border: none;
   cursor: pointer;
   font-size: 13px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: inherit;
   text-align: left;
   width: 100%;
   transition: color 0.15s, background 0.15s;
 }
-
-.nav-link:hover { color: #dde4ee; background: #223044; }
-
+.nav-link:hover {
+  color: #dde4ee;
+  background: #223044;
+}
 .nav-link.active {
   color: #ffffff;
   background: #2563eb;
@@ -85,12 +91,14 @@
   padding: 11px 12px;
   width: calc(100% - 16px);
 }
+.nav-icon {
+  font-size: 15px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
 
-.nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
-
-/* ================================================
-   MAIN CONTENT
-   ================================================ */
+/* ===================== MAIN ===================== */
 
 .main-content {
   flex: 1;
@@ -112,9 +120,7 @@
   padding: 0 24px;
   flex-shrink: 0;
 }
-
 .header-left { display: flex; align-items: center; gap: 12px; }
-
 .header-logo-icon {
   width: 38px;
   height: 38px;
@@ -125,11 +131,9 @@
   justify-content: center;
   font-size: 18px;
 }
-
 .header-logo-text { display: flex; flex-direction: column; }
 .header-logo-title { font-size: 15px; font-weight: 700; color: #111827; }
 .header-logo-sub   { font-size: 11px; color: #6b7280; }
-
 .header-right { display: flex; align-items: center; gap: 14px; }
 .header-admin-label { font-size: 14px; color: #374151; font-weight: 500; }
 
@@ -142,20 +146,19 @@
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: inherit;
   transition: background 0.2s;
 }
 .logout-btn:hover { background: #1d4ed8; }
 
-/* Scrollable body */
 .purchases-body {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 28px 26px 40px 26px;
   background: #f0f2f5;
 }
 
-/* ── Page title + top action buttons row ── */
 .purchases-top-row {
   display: flex;
   align-items: flex-start;
@@ -164,13 +167,10 @@
   flex-wrap: wrap;
   gap: 12px;
 }
-
 .page-title h1 { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 4px; }
 .page-title p  { font-size: 13.5px; color: #6b7280; }
-
 .top-action-btns { display: flex; gap: 12px; align-items: center; }
 
-/* New Purchase Order — blue */
 .new-order-btn {
   padding: 10px 20px;
   background: #2563eb;
@@ -180,13 +180,11 @@
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.2s;
   white-space: nowrap;
 }
 .new-order-btn:hover { background: #1d4ed8; }
 
-/* Manage Suppliers — purple */
 .manage-suppliers-btn {
   padding: 10px 20px;
   background: #7c3aed;
@@ -196,30 +194,85 @@
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.2s;
   white-space: nowrap;
 }
 .manage-suppliers-btn:hover { background: #6d28d9; }
 
-/* ================================================
-   TWO COLUMN LAYOUT
-   ================================================ */
+.success-message {
+  background: #dcfce7;
+  color: #15803d;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.error-message {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  margin-bottom: 16px;
+  text-align: center;
+}
 
+/* ===================== GRID ===================== */
+
+/*
+  KEY FIX: align-items: stretch so both columns are equal height.
+  The grid rows are determined by the taller column.
+  Both columns stretch to match each other.
+*/
 .purchases-grid {
   display: grid;
   grid-template-columns: 1fr 360px;
   gap: 20px;
-  align-items: start;
+  align-items: stretch; /* <-- was "start", now "stretch" for equal bottom */
 }
 
-/* White panel */
+.left-col,
+.right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===================== PANELS ===================== */
+
 .panel {
   background: #ffffff;
   border-radius: 14px;
   padding: 22px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
-  margin-bottom: 20px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+  CREATE ORDER panel and RECENT ORDERS panel use the SAME fixed height
+  so they always bottom-align perfectly with each other.
+  560px each — panel never grows.
+*/
+.panel-create-order {
+  height: 560px;
+  min-height: 560px;
+  max-height: 560px;
+  overflow: hidden;
+}
+
+.panel-orders {
+  height: 560px;      /* matches panel-create-order exactly */
+  min-height: 560px;
+  max-height: 560px;
+  overflow: hidden;
+}
+
+/* Suppliers & stats — auto height, stack below */
+.panel-suppliers,
+.panel-stats {
+  height: auto;
 }
 
 .panel-title {
@@ -227,23 +280,20 @@
   font-weight: 700;
   color: #111827;
   margin-bottom: 18px;
+  flex-shrink: 0;
 }
 
-/* ── Purchase Order Form ── */
+/* ===================== FORM ===================== */
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
+  flex-shrink: 0;
 }
-
 .form-group { display: flex; flex-direction: column; gap: 6px; }
-
-.form-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #374151;
-}
+.form-label { font-size: 13px; font-weight: 600; color: #374151; }
 
 .form-input,
 .form-select {
@@ -253,52 +303,65 @@
   font-size: 13.5px;
   color: #111827;
   background: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   outline: none;
   transition: border-color 0.2s;
 }
-
 .form-input:focus,
 .form-select:focus { border-color: #2563eb; }
 
-/* ── Medicine Items Table ── */
-.items-section { margin-bottom: 16px; }
+/* ===================== ITEMS SECTION ===================== */
+
+.items-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 8px;
+  overflow: hidden;
+}
 
 .items-title {
   font-size: 14px;
   font-weight: 600;
   color: #374151;
-  margin-bottom: 12px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.items-table-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  scroll-behavior: smooth;
 }
 
 .items-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 10px;
+  min-width: 480px;
 }
 
-.items-table thead tr {
-  border-bottom: 1px solid #e2e8f0;
+.items-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
-
+.items-table thead tr { border-bottom: 2px solid #e2e8f0; }
 .items-table thead th {
   padding: 10px 10px;
   font-size: 12.5px;
   font-weight: 600;
   color: #6b7280;
   text-align: left;
+  background: #f8fafc;
 }
+.items-table tbody tr { border-bottom: 1px solid #f1f5f9; }
+.items-table tbody tr:last-child { border-bottom: none; }
+.items-table tbody td { padding: 8px 8px; vertical-align: middle; }
 
-.items-table tbody tr {
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.items-table tbody td {
-  padding: 8px 6px;
-  vertical-align: middle;
-}
-
-/* Editable item input fields */
 .item-input {
   width: 100%;
   padding: 8px 10px;
@@ -306,18 +369,13 @@
   border-radius: 6px;
   font-size: 13px;
   color: #374151;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   outline: none;
   transition: border-color 0.2s;
   box-sizing: border-box;
 }
-
 .item-input:focus { border-color: #2563eb; }
-
-/* Smaller input for qty and price */
 .item-input-sm { max-width: 90px; }
 
-/* Row total — shown in blue */
 .item-total {
   color: #2563eb;
   font-weight: 600;
@@ -325,7 +383,6 @@
   white-space: nowrap;
 }
 
-/* Remove item (×) button */
 .remove-item-btn {
   width: 28px;
   height: 28px;
@@ -338,15 +395,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.2s;
 }
 .remove-item-btn:hover { background: #dc2626; }
 
-/* Add Medicine Item dashed button */
 .add-item-btn {
   width: 100%;
-  padding: 11px;
+  padding: 10px;
   border: 2px dashed #2563eb;
   border-radius: 8px;
   background: transparent;
@@ -354,93 +409,77 @@
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.2s;
+  flex-shrink: 0;
 }
 .add-item-btn:hover { background: #eff6ff; }
 
-/* Grand Total row */
 .grand-total-row {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 16px;
-  padding: 14px 0;
+  padding: 10px 0 8px 0;
   border-top: 1px solid #f1f5f9;
-  margin-bottom: 18px;
+  flex-shrink: 0;
 }
+.grand-total-label { font-size: 15px; font-weight: 600; color: #374151; }
+.grand-total-value { font-size: 22px; font-weight: 700; color: #16a34a; }
 
-.grand-total-label {
-  font-size: 15px;
-  font-weight: 600;
-  color: #374151;
-}
-
-.grand-total-value {
-  font-size: 22px;
-  font-weight: 700;
-  color: #16a34a;
-}
-
-/* Form action buttons */
 .form-actions {
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-shrink: 0;
 }
-
-.cancel-btn {
-  padding: 11px 24px;
-  background: #6b7280;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: background 0.2s;
-}
-.cancel-btn:hover { background: #4b5563; }
-
-.draft-btn {
-  padding: 11px 24px;
-  background: #f59e0b;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: background 0.2s;
-}
-.draft-btn:hover { background: #d97706; }
-
+.cancel-btn,
 .create-btn {
   padding: 11px 24px;
-  background: #16a34a;
-  color: #ffffff;
   border: none;
   border-radius: 8px;
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.2s;
+  color: #ffffff;
 }
+.cancel-btn { background: #6b7280; }
+.cancel-btn:hover { background: #4b5563; }
+.create-btn { background: #16a34a; }
 .create-btn:hover { background: #15803d; }
 
-/* ================================================
-   TOP SUPPLIERS
-   ================================================ */
+/* ===================== SUPPLIERS ===================== */
 
 .suppliers-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
+
+/* ===================== RECENT ORDERS ===================== */
+
+.orders-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.orders-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 4px;
+  scroll-behavior: smooth;
+}
+
+/* ===================== CARD UI ===================== */
 
 .supplier-item {
   display: flex;
@@ -450,8 +489,6 @@
   background: #f8fafc;
   border-radius: 10px;
 }
-
-/* Colored rank circle */
 .supplier-rank {
   width: 34px;
   height: 34px;
@@ -464,20 +501,9 @@
   justify-content: center;
   flex-shrink: 0;
 }
-
-.supplier-name {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 3px;
-}
-
-.supplier-detail {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-.supplier-info { flex: 1; }
+.supplier-name   { font-size: 13.5px; font-weight: 600; color: #111827; margin-bottom: 3px; }
+.supplier-detail { font-size: 12px; color: #6b7280; }
+.supplier-info   { flex: 1; }
 
 .view-supplier-btn {
   padding: 6px 16px;
@@ -487,12 +513,11 @@
   font-size: 12.5px;
   font-weight: 500;
   cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: opacity 0.2s;
+  white-space: nowrap;
 }
 .view-supplier-btn:hover { opacity: 0.85; }
 
-/* View all link */
 .view-all-link {
   background: none;
   border: none;
@@ -500,21 +525,12 @@
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 0;
+  align-self: flex-start;
+  flex-shrink: 0;
+  margin-top: 4px;
 }
 .view-all-link:hover { text-decoration: underline; }
-
-/* ================================================
-   RECENT PURCHASE ORDERS
-   ================================================ */
-
-.orders-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 14px;
-}
 
 .order-item {
   display: flex;
@@ -524,22 +540,26 @@
   background: #f8fafc;
   border-radius: 10px;
   gap: 10px;
+  flex-shrink: 0;
 }
+.order-id     { font-size: 13.5px; font-weight: 700; color: #111827; margin-bottom: 3px; }
+.order-detail { font-size: 12px; color: #6b7280; margin-bottom: 2px; }
+.order-info   { flex: 1; }
 
-.order-id {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 3px;
+.status-update-btn {
+  margin-top: 6px;
+  padding: 8px 14px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
 }
+.status-update-btn:hover { background: #1d4ed8; }
 
-.order-detail {
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 2px;
-}
-
-/* Status badges */
 .order-status {
   padding: 4px 12px;
   border-radius: 20px;
@@ -548,66 +568,218 @@
   white-space: nowrap;
   flex-shrink: 0;
 }
-
 .status-approved { background: #dcfce7; color: #15803d; }
 .status-pending  { background: #fef3c7; color: #92400e; }
 .status-received { background: #dbeafe; color: #1d4ed8; }
 
-/* ================================================
-   PURCHASE STATISTICS
-   ================================================ */
+/* ===================== STATS ===================== */
 
 .purchase-stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
-
-.purchase-stat-card {
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-}
-
-.pstat-label {
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 6px;
-}
-
-.pstat-value {
-  font-size: 24px;
-  font-weight: 700;
-  color: #2563eb;
-  margin-bottom: 4px;
-}
-
-.pstat-sub {
-  font-size: 11.5px;
-  color: #6b7280;
-}
-
-/* Each card color */
-.stat-blue   { background: #eff6ff; }
-.stat-green  { background: #f0fdf4; }
-.stat-orange { background: #fffbeb; }
-.stat-pink   { background: #fff1f2; }
-
+.purchase-stat-card { border-radius: 12px; padding: 16px; text-align: center; }
+.pstat-label  { font-size: 12px; color: #6b7280; margin-bottom: 6px; }
+.pstat-value  { font-size: 24px; font-weight: 700; color: #2563eb; margin-bottom: 4px; }
+.pstat-sub    { font-size: 11.5px; color: #6b7280; }
+.stat-blue    { background: #eff6ff; }
+.stat-green   { background: #f0fdf4; }
+.stat-orange  { background: #fffbeb; }
+.stat-pink    { background: #fff1f2; }
 .pstat-green  { color: #16a34a; }
 .pstat-orange { color: #f59e0b; }
 .pstat-pink   { color: #ef4444; }
 
-/* ================================================
-   RESPONSIVE
-   ================================================ */
+/* ===================== MODALS ===================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  width: 480px;
+  max-width: 95vw;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+}
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+.supplier-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+.delete-suppliers-list {
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 4px;
+  padding-right: 6px;
+}
+.delete-supplier-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.delete-supplier-row:last-child { border-bottom: none; }
+
+.modal-save-btn {
+  width: 100%;
+  padding: 11px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.modal-save-btn:hover { background: #1d4ed8; }
+
+.modal-cancel-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px;
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.modal-cancel-btn:hover { background: #f9fafb; }
+
+.delete-supplier-btn {
+  padding: 5px 14px;
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.delete-supplier-btn:hover { background: #dc2626; }
+
+.supplier-detail-card {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  color: #374151;
+  padding: 6px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-label  { font-weight: 600; color: #6b7280; }
+.detail-amount { color: #16a34a; font-weight: 700; }
+
+.order-history-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.order-history-item:last-child { border-bottom: none; }
+.order-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.order-medicines-list {
+  margin-top: 8px;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.order-medicine-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: #374151;
+  padding: 4px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.order-medicine-row:last-child { border-bottom: none; }
+
+.supplier-expanded-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.supplier-expanded-item:last-child { border-bottom: none; }
+.supplier-expanded-info { flex: 1; }
+
+.no-results {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+  padding: 14px 0;
+}
+
+/* ===================== RESPONSIVE ===================== */
 
 @media (max-width: 1100px) {
   .purchases-grid { grid-template-columns: 1fr; }
+
+  .panel-create-order,
+  .panel-orders {
+    height: auto;
+    min-height: unset;
+    max-height: unset;
+    overflow: visible;
+  }
+  .items-section { overflow: visible; }
+  .items-table-wrap {
+    max-height: 260px;
+    overflow-y: auto;
+    overflow-x: auto;
+  }
+  .orders-area { overflow: visible; }
+  .orders-list {
+    max-height: 380px;
+    overflow-y: auto;
+  }
 }
 
 @media (max-width: 900px) {
   .sidebar { width: 62px; min-width: 62px; }
-  .sidebar-logo-name, .sidebar-logo-sub { display: none; }
+  .sidebar-logo-name,
+  .sidebar-logo-sub { display: none; }
   .nav-link span:not(.nav-icon) { display: none; }
 }
 
@@ -617,4 +789,50 @@
   .form-actions { flex-direction: column; }
   .purchase-stats-grid { grid-template-columns: 1fr; }
   .purchases-top-row { flex-direction: column; }
+}
+
+
+@media print {
+  body * {
+    visibility: hidden !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+  .print-stock-report, .print-stock-report * {
+    visibility: visible !important;
+    color: #111 !important;
+  }
+  .print-stock-report {
+    position: absolute;
+    left: 0; top: 0; right: 0;
+    margin: 0 auto;
+    width: 95vw;
+    background: #fff !important;
+    box-shadow: none !important;
+    padding: 12px;
+    font-size: 15px;
+    z-index: 9999;
+  }
+  .print-stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+  .print-stock-table th, .print-stock-table td {
+    border: 1px solid #222;
+    padding: 6px 10px;
+    text-align: left;
+    background: #fff !important;
+    color: #222 !important;
+  }
+  .print-stock-table th {
+    background: #f2f2f2 !important;
+    font-weight: bold;
+  }
+}
+@media screen {
+  .print-stock-report {
+    display: none;
+  }
 }

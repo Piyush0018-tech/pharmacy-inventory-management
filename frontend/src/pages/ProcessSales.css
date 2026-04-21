@@ -1,6 +1,4 @@
-/* ================================================
-   ProcessSales.css — MediTrack Pharmacy System
-   ================================================ */
+/* Process Sales page layout */
 
 .sales-wrapper {
   display: flex;
@@ -14,9 +12,7 @@
   left: 0;
 }
 
-/* ================================================
-   SIDEBAR
-   ================================================ */
+/* Sidebar */
 
 .sidebar {
   width: 215px;
@@ -88,9 +84,7 @@
 
 .nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
 
-/* ================================================
-   MAIN CONTENT
-   ================================================ */
+/* Main area */
 
 .main-content {
   flex: 1;
@@ -126,11 +120,11 @@
   font-size: 18px;
 }
 
-.header-logo-text { display: flex; flex-direction: column; }
+.header-logo-text  { display: flex; flex-direction: column; }
 .header-logo-title { font-size: 15px; font-weight: 700; color: #111827; }
 .header-logo-sub   { font-size: 11px; color: #6b7280; }
 
-.header-right { display: flex; align-items: center; gap: 14px; }
+.header-right       { display: flex; align-items: center; gap: 14px; }
 .header-admin-label { font-size: 14px; color: #374151; font-weight: 500; }
 
 .logout-btn {
@@ -147,10 +141,10 @@
 }
 .logout-btn:hover { background: #1d4ed8; }
 
-/* Scrollable body */
 .sales-body {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 28px 26px 40px 26px;
   background: #f0f2f5;
 }
@@ -159,15 +153,32 @@
 .page-title h1 { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 4px; }
 .page-title p  { font-size: 13.5px; color: #6b7280; }
 
-/* ── Two column layout ── */
-.sales-grid {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 20px;
-  align-items: start;
+.error-message {
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  margin-bottom: 16px;
 }
 
-/* White panel */
+/* Two cards on top (Search + Cart) */
+
+.sales-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Same height for both top cards */
+.top-card {
+  display: flex;
+  flex-direction: column;
+  height: 560px;
+}
+
+/* White box */
 .panel {
   background: #ffffff;
   border-radius: 14px;
@@ -183,20 +194,10 @@
   margin-bottom: 16px;
 }
 
-/* ================================================
-   SEARCH MEDICINE
-   ================================================ */
+/* Search */
 
-.search-row {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.search-wrapper {
-  flex: 1;
-  position: relative;
-}
+.search-row { display: flex; gap: 12px; margin-bottom: 18px; }
+.search-wrapper { flex: 1; position: relative; }
 
 .search-icon {
   position: absolute;
@@ -242,11 +243,14 @@
   margin-bottom: 12px;
 }
 
-/* Medicine rows list */
+.empty-text { padding: 16px; color: #9ca3af; text-align: center; }
+
+/* Scroll only the medicines list */
 .medicines-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  min-height: 0;
 }
 
 .medicine-row {
@@ -257,22 +261,11 @@
   border-bottom: 1px solid #f1f5f9;
   gap: 12px;
 }
-
 .medicine-row:last-child { border-bottom: none; }
 
-.medicine-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 4px;
-}
+.medicine-name { font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 4px; }
+.medicine-detail { font-size: 12.5px; color: #6b7280; }
 
-.medicine-detail {
-  font-size: 12.5px;
-  color: #6b7280;
-}
-
-/* Add to Cart — green button */
 .add-to-cart-btn {
   padding: 8px 18px;
   background: #16a34a;
@@ -287,95 +280,22 @@
   transition: background 0.2s;
 }
 .add-to-cart-btn:hover { background: #15803d; }
+.add-to-cart-btn:disabled { background: #9ca3af; cursor: not-allowed; }
 
-/* ================================================
-   RECENT SALES TABLE
-   ================================================ */
-
-.sales-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 14px;
-}
-
-.sales-table thead tr { background: #2563eb; }
-
-.sales-table thead th {
-  padding: 12px 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #ffffff;
-  text-align: left;
-}
-
-/* Center all except Invoice and Customer */
-.sales-table thead th:nth-child(3),
-.sales-table thead th:nth-child(4),
-.sales-table thead th:nth-child(5),
-.sales-table thead th:nth-child(6) { text-align: center; }
-
-.sales-table tbody tr {
-  border-bottom: 1px solid #f1f5f9;
-  transition: background 0.15s;
-}
-.sales-table tbody tr:last-child { border-bottom: none; }
-.sales-table tbody tr:hover { background: #f8fafc; }
-
-.sales-table tbody td {
-  padding: 12px 14px;
-  font-size: 13.5px;
-  color: #374151;
-  text-align: left;
-}
-
-.sales-table tbody td:nth-child(3),
-.sales-table tbody td:nth-child(4),
-.sales-table tbody td:nth-child(5),
-.sales-table tbody td:nth-child(6) { text-align: center; }
-
-/* Invoice number — blue link style */
-.invoice-link { color: #2563eb; font-weight: 600; }
-
-/* Amount — green */
-.amount-cell { color: #16a34a; font-weight: 600; }
-
-.view-btn {
-  padding: 5px 16px;
-  background: #2563eb;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: background 0.2s;
-}
-.view-btn:hover { background: #1d4ed8; }
-
-.view-all-link {
-  background: none;
-  border: none;
-  color: #2563eb;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 0;
-}
-.view-all-link:hover { text-decoration: underline; }
-
-/* ================================================
-   SHOPPING CART (right column)
-   ================================================ */
+/* Cart */
 
 .cart-panel {
   background: #ffffff;
   border-radius: 14px;
   padding: 20px;
   box-shadow: 0 1px 8px rgba(0,0,0,0.07);
-  position: sticky;
-  top: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  /* Keep bottom buttons visible */
+  overflow: visible;
+  min-height: 0;
 }
 
 .cart-header {
@@ -385,13 +305,8 @@
   margin-bottom: 16px;
 }
 
-.cart-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #111827;
-}
+.cart-title { font-size: 16px; font-weight: 700; color: #111827; }
 
-/* Blue count badge */
 .cart-badge {
   background: #2563eb;
   color: #ffffff;
@@ -405,24 +320,16 @@
   justify-content: center;
 }
 
-.cart-empty {
-  color: #9ca3af;
-  font-size: 13px;
-  text-align: center;
-  padding: 20px 0;
-}
-
-/* Individual cart items */
+/* Scroll only cart items */
 .cart-items {
-  max-height: 260px;
+  flex: 1;
   overflow-y: auto;
+  padding-right: 10px;
   margin-bottom: 14px;
+  min-height: 0;
 }
 
-.cart-item {
-  padding: 10px 0;
-  border-bottom: 1px solid #f1f5f9;
-}
+.cart-item { padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
 .cart-item:last-child { border-bottom: none; }
 
 .cart-item-top {
@@ -432,11 +339,7 @@
   margin-bottom: 4px;
 }
 
-.cart-item-name {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #111827;
-}
+.cart-item-name { font-size: 13.5px; font-weight: 600; color: #111827; }
 
 .cart-remove-btn {
   background: #ef4444;
@@ -450,77 +353,85 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.cart-item-price {
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 8px;
-}
+.cart-item-price { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
 
+/* Qty left, total right */
 .cart-item-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
 }
 
-/* Qty input box */
 .cart-qty-input {
-  width: 70px;
-  padding: 6px 10px;
+  width: 86px;
+  padding: 8px 10px;
   border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 13px;
+  border-radius: 8px;
+  font-size: 14px;
   color: #374151;
   outline: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Row total — blue */
 .cart-item-total {
-  font-size: 13.5px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   color: #2563eb;
+  white-space: nowrap;
 }
 
-/* ── Totals section ── */
+/* Totals */
+
 .cart-totals {
   border-top: 1px solid #f1f5f9;
   padding-top: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .total-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 13px;
   color: #374151;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
-/* Discount shown in red */
-.discount-val { color: #ef4444; }
+.discount-wrapper { display: flex; align-items: center; }
 
-/* Grand total row */
+.discount-input {
+  width: 70px;
+  padding: 4px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #374151;
+  text-align: right;
+  outline: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.discount-input:focus { border-color: #2563eb; }
+
+.discount-amount-row { color: #6b7280; font-size: 12.5px; }
+.discount-amount-val { color: #ef4444; font-weight: 600; }
+
 .total-row.grand {
   font-size: 15px;
   font-weight: 700;
   color: #111827;
   border-top: 1px solid #e2e8f0;
   padding-top: 10px;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
-.grand-total-val {
-  color: #16a34a;
-  font-size: 18px;
-  font-weight: 700;
-}
+.grand-total-val { color: #16a34a; font-size: 18px; font-weight: 700; }
 
-/* Customer details inputs */
-.customer-section { margin-bottom: 14px; }
+/* Customer inputs */
+
+.customer-section { margin-bottom: 10px; }
 
 .customer-label {
   font-size: 12.5px;
@@ -543,7 +454,13 @@
 }
 .customer-input:focus { border-color: #2563eb; }
 
-/* Clear cart — gray */
+/* Buttons always at bottom */
+.cart-actions {
+  margin-top: auto;
+  padding-top: 10px;
+  background: #ffffff;
+}
+
 .clear-cart-btn {
   width: 100%;
   padding: 11px;
@@ -560,7 +477,6 @@
 }
 .clear-cart-btn:hover { background: #4b5563; }
 
-/* Proceed to Payment — green */
 .proceed-btn {
   width: 100%;
   padding: 12px;
@@ -575,13 +491,105 @@
   transition: background 0.2s;
 }
 .proceed-btn:hover { background: #15803d; }
+.proceed-btn:disabled { background: #9ca3af; cursor: not-allowed; }
 
-/* ================================================
-   RESPONSIVE
-   ================================================ */
+/* Recent sales table */
+
+.recent-sales-full { grid-column: 1 / -1; }
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 14px;
+  table-layout: fixed;
+}
+
+.sales-table thead tr { background: #2563eb; }
+
+.sales-table thead th,
+.sales-table tbody td {
+  padding: 12px 14px;
+  font-size: 13.5px;
+  text-align: left;
+}
+
+.sales-table thead th {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.sales-table tbody tr { border-bottom: 1px solid #f1f5f9; transition: background 0.15s; }
+.sales-table tbody tr:last-child { border-bottom: none; }
+.sales-table tbody tr:hover { background: #f8fafc; }
+
+.sales-table tbody td {
+  color: #374151;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Center Amount, Method, Action */
+.sales-table thead th:nth-child(3),
+.sales-table tbody td:nth-child(3),
+.sales-table thead th:nth-child(4),
+.sales-table tbody td:nth-child(4),
+.sales-table thead th:nth-child(5),
+.sales-table tbody td:nth-child(5) {
+  text-align: center;
+}
+
+.no-results { text-align: center; color: #9ca3af; padding: 20px 0; }
+.invoice-link { color: #2563eb; font-weight: 600; }
+.amount-cell { color: #16a34a; font-weight: 600; }
+
+.view-btn {
+  padding: 6px 16px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.view-btn:hover { background: #1d4ed8; }
+
+/* Pagination */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.page-btn {
+  background: transparent;
+  border: none;
+  color: #374151;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
+}
+.page-btn:hover { color: #111827; text-decoration: underline; }
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; text-decoration: none; }
+
+.page-info { color: #374151; font-size: 13.5px; font-weight: 600; }
+
+/* Responsive */
 
 @media (max-width: 1100px) {
   .sales-grid { grid-template-columns: 1fr; }
+  .top-card { height: auto; }
+  .recent-sales-full { grid-column: auto; }
 }
 
 @media (max-width: 900px) {

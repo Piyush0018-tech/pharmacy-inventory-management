@@ -168,6 +168,13 @@
   margin-bottom: 20px;
 }
 
+/* Only use full-height/flex layout on the top two panels */
+.panel-equal-height {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .panel-title {
   font-size: 16px;
   font-weight: 700;
@@ -181,7 +188,20 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-bottom: 0;
-  align-items: start;
+  align-items: stretch;
+}
+
+/* make left/right columns stretch to match height */
+.left-col,
+.right-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ensure the first panel in each column takes equal height */
+.left-col > .panel,
+.right-col > .panel {
+  flex: 1;
 }
 
 /* ================================================
@@ -267,21 +287,9 @@
   margin-bottom: 18px;
 }
 
-.customer-details-title {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 8px;
-}
-
-.customer-detail-row {
-  font-size: 13px;
-  color: #374151;
-  margin-bottom: 4px;
-}
-
-/* Back to cart button */
+/* Back button stays at bottom in equal-height panel */
 .back-btn {
+  margin-top: auto;
   padding: 9px 20px;
   background: #6b7280;
   color: #ffffff;
@@ -295,11 +303,23 @@
 }
 .back-btn:hover { background: #4b5563; }
 
+.customer-details-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.customer-detail-row {
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
 /* ================================================
    PAYMENT METHOD (right)
    ================================================ */
 
-/* Method cards grid — 2 per row but we have 3 so wrap */
 .payment-methods {
   display: flex;
   flex-direction: column;
@@ -307,7 +327,6 @@
   margin-bottom: 20px;
 }
 
-/* Individual method card */
 .method-card {
   display: flex;
   align-items: center;
@@ -321,13 +340,11 @@
 
 .method-card:hover { border-color: #2563eb; background: #f8fafc; }
 
-/* Selected method card */
 .method-active {
   border-color: #2563eb;
   background: #eff6ff;
 }
 
-/* Radio circle */
 .method-radio {
   width: 22px;
   height: 22px;
@@ -362,7 +379,7 @@
   color: #6b7280;
 }
 
-/* Cash / Wallet / Bank detail fields */
+/* Cash / Wallet detail fields */
 .cash-details {
   background: #f8fafc;
   border-radius: 10px;
@@ -377,7 +394,6 @@
   margin-bottom: 14px;
 }
 
-/* Amount received + Change side by side */
 .cash-fields {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -404,7 +420,6 @@
 }
 .cash-input:focus { border-color: #2563eb; }
 
-/* Change to return shown in green */
 .cash-change {
   background: #f0fdf4;
   color: #16a34a;
@@ -412,10 +427,11 @@
   border-color: #86efac;
 }
 
-/* Payment action buttons */
+/* Payment action buttons stay at bottom in equal-height panel */
 .payment-actions {
   display: flex;
   gap: 12px;
+  margin-top: auto;
 }
 
 .cancel-payment-btn {
@@ -467,7 +483,6 @@
   text-align: left;
 }
 
-/* Center align all except Invoice and Customer */
 .payments-table thead th:nth-child(3),
 .payments-table thead th:nth-child(4),
 .payments-table thead th:nth-child(5),
@@ -495,7 +510,6 @@
 .invoice-link { color: #2563eb; font-weight: 600; }
 .amount-cell  { color: #16a34a; font-weight: 600; }
 
-/* Status badge */
 .status-badge {
   display: inline-block;
   padding: 4px 14px;
@@ -520,6 +534,215 @@
   transition: background 0.2s;
 }
 .view-invoice-btn:hover { background: #1d4ed8; }
+
+/* Pagination (Recent Payments) */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.page-btn {
+  background: transparent;
+  border: none;
+  color: #374151;        
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.page-btn:hover {
+  color: #111827;            
+  text-decoration: underline;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.page-info {
+  color: #374151;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+/* ================================================
+   INVOICE MODAL
+   ================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-box {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  width: 520px;
+  max-width: 95vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.modal-header h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.modal-close-btn {
+  background: #f3f4f6;
+  border: none;
+  font-size: 14px;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.modal-close-btn:hover { background: #e5e7eb; color: #111827; }
+
+.modal-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid #f9fafb;
+  font-size: 13.5px;
+}
+
+.modal-info-label { color: #6b7280; font-weight: 500; }
+.modal-info-value { color: #111827; font-weight: 500; }
+
+.modal-items-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.modal-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 4px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.modal-items-table thead tr {
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-items-table thead th {
+  padding: 10px 12px;
+  text-align: left;
+  color: #374151;
+  font-weight: 600;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.modal-items-table tbody tr { border-bottom: 1px solid #f1f5f9; }
+.modal-items-table tbody tr:last-child { border-bottom: none; }
+.modal-items-table tbody tr:hover { background: #fafafa; }
+.modal-items-table tbody td { padding: 10px 12px; color: #374151; }
+
+.modal-items-table th:nth-child(1),
+.modal-items-table td:nth-child(1) {
+  width: 45%;
+  text-align: left;
+  word-break: break-word;
+}
+
+.modal-items-table th:nth-child(2),
+.modal-items-table td:nth-child(2) {
+  width: 15%;
+  text-align: center;
+}
+
+.modal-items-table th:nth-child(3),
+.modal-items-table td:nth-child(3),
+.modal-items-table th:nth-child(4),
+.modal-items-table td:nth-child(4) {
+  width: 20%;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.modal-totals {
+  margin-top: 16px;
+  border-top: 2px solid #f1f5f9;
+  padding-top: 12px;
+}
+
+.modal-grand-total {
+  font-weight: 700;
+  font-size: 15px;
+  margin-top: 6px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 10px;
+}
+
+
+
+/* ===== Modal extra UI (Payment Details + Download button) ===== */
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.modal-download-btn {
+  padding: 6px 14px;
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.2s;
+}
+
+.modal-download-btn:hover {
+  background: #15803d;
+}
+
+.modal-section-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #111827;
+  margin: 6px 0 6px;
+}
 
 /* ================================================
    RESPONSIVE
